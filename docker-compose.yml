@@ -1,0 +1,32 @@
+version: '2'
+services:
+        
+  ngix:
+    build: ./docker/ngix
+    ports:
+      - "8080:80"
+    expose:
+      - "8080"
+    links:
+      - php
+    volumes_from:
+      - php
+
+  php:
+    build: ./docker/php-fpm
+    environment:
+      TIMEZONE: Europe/Paris
+    volumes:
+      - ./:/app
+      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
+    links:
+      - db
+    working_dir: /app
+
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
