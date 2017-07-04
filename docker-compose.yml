@@ -20,18 +20,25 @@ services:
       - ./:/app
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
       - /app-vendor
+      - ../symfony:/app/symfony
     links:
       - db
     working_dir: /app
 
   composer:
     image: composer:1.4
+    extra_hosts:
+      - "symfony2.dev:172.27.0.1"
     volumes_from:
       - php
     working_dir: /app
 
   db:
     image: mysql:5.6
+    ports:
+      - "3306:3306"
+    expose: 
+      - "3306"
     environment:
       MYSQL_DATABASE: symfony
       MYSQL_USER: root

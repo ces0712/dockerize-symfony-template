@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install \
         intl \
         opcache \
+        pdo \ 
+        pdo_mysql \
     && docker-php-ext-enable \
         intl \
         opcache
