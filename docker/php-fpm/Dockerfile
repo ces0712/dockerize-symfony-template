@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y \
         intl \
         opcache
 
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/bin/composer
-
 RUN useradd -ms /bin/bash devUser
  
 USER devUser
 
+# Permission fix
+# RUN usermod -u 1000 www-data  
+
 WORKDIR /app
+

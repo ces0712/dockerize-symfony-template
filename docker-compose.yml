@@ -19,8 +19,15 @@ services:
     volumes:
       - ./:/app
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
+      - /app-vendor
     links:
       - db
+    working_dir: /app
+
+  composer:
+    image: composer:1.4
+    volumes_from:
+      - php
     working_dir: /app
 
   db:

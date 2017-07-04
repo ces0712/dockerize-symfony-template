@@ -50,6 +50,7 @@
     },
     "config": {
         "bin-dir": "bin",
+        "vendor-dir": "/app-vendor",
         "sort-packages": true
     },
     "extra": {
